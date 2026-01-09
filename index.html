@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker - Daily Job Monitoring</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #5568d3;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            padding: 6px 12px;
+            font-size: 0.9rem;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        select {
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 26px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #667eea;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+
+        .company-group {
+            margin-bottom: 30px;
+        }
+
+        .company-group-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .company-job-count {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+
+        .company-jobs {
+            border: 2px solid #667eea;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 15px;
+            background: #f8f9ff;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            padding: 8px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .tag button {
+            background: transparent;
+            color: #dc3545;
+            padding: 0;
+            font-size: 1.2rem;
+            line-height: 1;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .job-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .job-item {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            transition: border-color 0.3s, transform 0.2s;
+            position: relative;
+        }
+
+        .job-item:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .job-item.new-job {
+            border-color: #28a745;
+            background: #f0fff4;
+        }
+
+        .job-item .new-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .job-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .job-company {
+            font-size: 1rem;
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .job-location {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .job-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.85rem;
+        }
+
+        .job-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #555;
+        }
+
+        .job-meta-item .label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .visa-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .visa-badge.sponsored {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .visa-badge.not-sponsored {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .visa-badge.unknown {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .deadline-warning {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        .deadline-soon {
+            color: #fd7e14;
+            font-weight: 600;
+        }
+
+        .job-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .job-link:hover {
+            text-decoration: underline;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .last-checked {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .autocomplete-wrapper {
+            position: relative;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #667eea;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .autocomplete-item {
+            padding: 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+
+        .autocomplete-item:last-child {
+            border-bottom: none;
+        }
+
+        .autocomplete-item:hover,
+        .autocomplete-item.selected {
+            background: #f0f0ff;
+        }
+
+        .autocomplete-item .company-name {
+            font-weight: 600;
+            color: #333;
+            display: block;
+        }
+
+        .autocomplete-item .company-info {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .autocomplete-loading {
+            padding: 12px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .autocomplete-no-results {
+            padding: 12px;
+            text-align: center;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+            
+            input[type="text"],
+            .autocomplete-wrapper {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Job Tracker</h1>
+            <p>Monitor job openings from your target companies</p>
+        </div>
+
+        <div class="card">
+            <h2>📊 Today's Summary</h2>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalJobs">0</div>
+                    <div class="stat-label">Total Jobs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="newJobs">0</div>
+                    <div class="stat-label">New Today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="trackedCompanies">0</div>
+                    <div class="stat-label">Companies</div>
+                </div>
+            </div>
+            <button onclick="checkJobs()" id="checkButton">🔄 Check for New Jobs</button>
+            <div class="last-checked" id="lastChecked"></div>
+        </div>
+
+        <div class="card">
+            <h2>🏢 Companies to Track</h2>
+            <div class="input-group">
+                <div class="autocomplete-wrapper">
+                    <input type="text" id="companyInput" placeholder="Start typing company name..." autocomplete="off" oninput="handleCompanyInput(event)" onkeydown="handleCompanyKeydown(event)">
+                    <div id="companyDropdown" class="autocomplete-dropdown" style="display: none;"></div>
+                </div>
+                <button onclick="addCompany()">Add Company</button>
+            </div>
+            <div class="tag-list" id="companyList"></div>
+        </div>
+
+        <div class="card">
+            <h2>💼 Job Roles to Track</h2>
+            <div class="input-group">
+                <input type="text" id="roleInput" placeholder="Enter job role (e.g., Software Engineer, Product Manager)" onkeypress="if(event.key==='Enter') addRole()">
+                <button onclick="addRole()">Add Role</button>
+            </div>
+            <div class="tag-list" id="roleList"></div>
+        </div>
+
+        <div class="card">
+            <h2>🌍 Preferred Locations</h2>
+            <div class="input-group">
+                <input type="text" id="locationInput" placeholder="Enter city (e.g., New York, Remote, San Francisco)" onkeypress="if(event.key==='Enter') addLocation()">
+                <button onclick="addLocation()">Add Location</button>
+            </div>
+            <div class="tag-list" id="locationList"></div>
+        </div>
+
+        <div class="card">
+            <h2>📋 Job Openings</h2>
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <label for="cityFilter">Filter by City:</label>
+                    <select id="cityFilter" onchange="filterJobs()">
+                        <option value="all">All Locations</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="visaFilter">Filter by Visa:</label>
+                    <select id="visaFilter" onchange="filterJobs()">
+                        <option value="all">All Jobs</option>
+                        <option value="sponsored">Visa Sponsored Only</option>
+                        <option value="not-sponsored">No Sponsorship</option>
+                        <option value="unknown">Unspecified</option>
+                    </select>
+                </div>
+                <div class="toggle-group">
+                    <label for="groupToggle" style="font-weight: 600; color: #333;">Group by Company:</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="groupToggle" onchange="filterJobs()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+            <div id="jobResults"></div>
+        </div>
+    </div>
+
+    <script>
+        // Storage keys
+        const STORAGE_KEYS = {
+            companies: 'jobTracker_companies',
+            roles: 'jobTracker_roles',
+            locations: 'jobTracker_locations',
+            seenJobs: 'jobTracker_seenJobs',
+            lastChecked: 'jobTracker_lastChecked'
+        };
+
+        // Popular companies database (you can expand this list)
+        const POPULAR_COMPANIES = [
+            { name: 'Google', industry: 'Technology', type: 'Public' },
+            { name: 'Microsoft', industry: 'Technology', type: 'Public' },
+            { name: 'Apple', industry: 'Technology', type: 'Public' },
+            { name: 'Amazon', industry: 'E-commerce/Technology', type: 'Public' },
+            { name: 'Meta', industry: 'Technology/Social Media', type: 'Public' },
+            { name: 'Netflix', industry: 'Entertainment/Technology', type: 'Public' },
+            { name: 'Tesla', industry: 'Automotive/Technology', type: 'Public' },
+            { name: 'Nvidia', industry: 'Technology/Semiconductors', type: 'Public' },
+            { name: 'Adobe', industry: 'Technology/Software', type: 'Public' },
+            { name: 'Salesforce', industry: 'Technology/CRM', type: 'Public' },
+            { name: 'Oracle', industry: 'Technology/Database', type: 'Public' },
+            { name: 'IBM', industry: 'Technology/Consulting', type: 'Public' },
+            { name: 'Intel', industry: 'Technology/Semiconductors', type: 'Public' },
+            { name: 'Cisco', industry: 'Technology/Networking', type: 'Public' },
+            { name: 'SAP', industry: 'Technology/Enterprise Software', type: 'Public' },
+            { name: 'Spotify', industry: 'Technology/Music Streaming', type: 'Public' },
+            { name: 'Uber', industry: 'Technology/Transportation', type: 'Public' },
+            { name: 'Airbnb', industry: 'Technology/Hospitality', type: 'Public' },
+            { name: 'LinkedIn', industry: 'Technology/Professional Network', type: 'Public' },
+            { name: 'Slack', industry: 'Technology/Communication', type: 'Public' },
+            { name: 'Zoom', industry: 'Technology/Video Conferencing', type: 'Public' },
+            { name: 'Dropbox', industry: 'Technology/Cloud Storage', type: 'Public' },
+            { name: 'Twitter (X)', industry: 'Technology/Social Media', type: 'Private' },
+            { name: 'Pinterest', industry: 'Technology/Social Media', type: 'Public' },
+            { name: 'Snapchat', industry: 'Technology/Social Media', type: 'Public' },
+            { name: 'Reddit', industry: 'Technology/Social Media', type: 'Public' },
+            { name: 'TikTok', industry: 'Technology/Social Media', type: 'Private' },
+            { name: 'PayPal', industry: 'Financial Technology', type: 'Public' },
+            { name: 'Square', industry: 'Financial Technology', type: 'Public' },
+            { name: 'Stripe', industry: 'Financial Technology', type: 'Private' },
+            { name: 'Coinbase', industry: 'Financial Technology/Crypto', type: 'Public' },
+            { name: 'Goldman Sachs', industry: 'Financial Services', type: 'Public' },
+            { name: 'JPMorgan Chase', industry: 'Financial Services', type: 'Public' },
+            { name: 'Morgan Stanley', industry: 'Financial Services', type: 'Public' },
+            { name: 'McKinsey & Company', industry: 'Consulting', type: 'Private' },
+            { name: 'Boston Consulting Group', industry: 'Consulting', type: 'Private' },
+            { name: 'Deloitte', industry: 'Consulting/Accounting', type: 'Private' },
+            { name: 'PwC', industry: 'Consulting/Accounting', type: 'Private' },
+            { name: 'EY', industry: 'Consulting/Accounting', type: 'Private' },
+            { name: 'KPMG', industry: 'Consulting/Accounting', type: 'Private' },
+            { name: 'Accenture', industry: 'Consulting/Technology', type: 'Public' },
+            { name: 'Palantir', industry: 'Technology/Data Analytics', type: 'Public' },
+            { name: 'Snowflake', industry: 'Technology/Data Warehousing', type: 'Public' },
+            { name: 'Databricks', industry: 'Technology/Data Analytics', type: 'Private' },
+            { name: 'MongoDB', industry: 'Technology/Database', type: 'Public' },
+            { name: 'Atlassian', industry: 'Technology/Software', type: 'Public' },
+            { name: 'ServiceNow', industry: 'Technology/Cloud Computing', type: 'Public' },
+            { name: 'Workday', industry: 'Technology/HR Software', type: 'Public' },
+            { name: 'DocuSign', industry: 'Technology/Digital Signatures', type: 'Public' },
+            { name: 'HubSpot', industry: 'Technology/Marketing', type: 'Public' },
+            { name: 'Shopify', industry: 'E-commerce/Technology', type: 'Public' },
+            { name: 'Etsy', industry: 'E-commerce', type: 'Public' },
+            { name: 'eBay', industry: 'E-commerce', type: 'Public' },
+            { name: 'Walmart', industry: 'Retail', type: 'Public' },
+            { name: 'Target', industry: 'Retail', type: 'Public' },
+            { name: 'Costco', industry: 'Retail', type: 'Public' },
+            { name: 'Home Depot', industry: 'Retail/Home Improvement', type: 'Public' },
+            { name: 'Boeing', industry: 'Aerospace', type: 'Public' },
+            { name: 'SpaceX', industry: 'Aerospace', type: 'Private' },
+            { name: 'Lockheed Martin', industry: 'Aerospace/Defense', type: 'Public' },
+            { name: 'Raytheon', industry: 'Aerospace/Defense', type: 'Public' },
+            { name: 'Johnson & Johnson', industry: 'Healthcare/Pharmaceuticals', type: 'Public' },
+            { name: 'Pfizer', industry: 'Pharmaceuticals', type: 'Public' },
+            { name: 'Moderna', industry: 'Biotechnology', type: 'Public' },
+            { name: 'AbbVie', industry: 'Pharmaceuticals', type: 'Public' },
+            { name: 'Bristol Myers Squibb', industry: 'Pharmaceuticals', type: 'Public' },
+            { name: 'UnitedHealth Group', industry: 'Healthcare', type: 'Public' },
+            { name: 'CVS Health', industry: 'Healthcare/Pharmacy', type: 'Public' },
+            { name: 'Procter & Gamble', industry: 'Consumer Goods', type: 'Public' },
+            { name: 'Coca-Cola', industry: 'Beverages', type: 'Public' },
+            { name: 'PepsiCo', industry: 'Food & Beverages', type: 'Public' },
+            { name: 'Nike', industry: 'Apparel/Footwear', type: 'Public' },
+            { name: 'Adidas', industry: 'Apparel/Footwear', type: 'Public' },
+            { name: 'Disney', industry: 'Entertainment/Media', type: 'Public' },
+            { name: 'Warner Bros', industry: 'Entertainment/Media', type: 'Public' },
+            { name: 'Sony', industry: 'Electronics/Entertainment', type: 'Public' },
+            { name: 'Samsung', industry: 'Electronics/Technology', type: 'Public' },
+            { name: 'LG', industry: 'Electronics', type: 'Public' },
+            { name: 'Dell', industry: 'Technology/Hardware', type: 'Private' },
+            { name: 'HP', industry: 'Technology/Hardware', type: 'Public' },
+            { name: 'Lenovo', industry: 'Technology/Hardware', type: 'Public' },
+            { name: 'Ford', industry: 'Automotive', type: 'Public' },
+            { name: 'General Motors', industry: 'Automotive', type: 'Public' },
+            { name: 'Toyota', industry: 'Automotive', type: 'Public' },
+            { name: 'Volkswagen', industry: 'Automotive', type: 'Public' },
+            { name: 'BMW', industry: 'Automotive', type: 'Public' },
+            { name: 'Mercedes-Benz', industry: 'Automotive', type: 'Public' },
+            { name: 'Rivian', industry: 'Automotive/Electric Vehicles', type: 'Public' },
+            { name: 'Lucid Motors', industry: 'Automotive/Electric Vehicles', type: 'Public' },
+            { name: 'Anthropic', industry: 'Technology/AI', type: 'Private' },
+            { name: 'OpenAI', industry: 'Technology/AI', type: 'Private' },
+            { name: 'Mistral AI', industry: 'Technology/AI', type: 'Private' },
+            { name: 'Cohere', industry: 'Technology/AI', type: 'Private' },
+            { name: 'Hugging Face', industry: 'Technology/AI', type: 'Private' },
+            { name: 'Scale AI', industry: 'Technology/AI', type: 'Private' }
+        ];
+
+        // Autocomplete state
+        let companySearchTimeout;
+        let selectedCompanyIndex = -1;
+        let currentCompanySuggestions = [];
+
+        // Initialize app
+        let companies = JSON.parse(localStorage.getItem(STORAGE_KEYS.companies) || '[]');
+        let roles = JSON.parse(localStorage.getItem(STORAGE_KEYS.roles) || '[]');
+        let locations = JSON.parse(localStorage.getItem(STORAGE_KEYS.locations) || '[]');
+        let seenJobs = JSON.parse(localStorage.getItem(STORAGE_KEYS.seenJobs) || '[]');
+        let allJobs = [];
+
+        function saveData() {
+            localStorage.setItem(STORAGE_KEYS.companies, JSON.stringify(companies));
+            localStorage.setItem(STORAGE_KEYS.roles, JSON.stringify(roles));
+            localStorage.setItem(STORAGE_KEYS.locations, JSON.stringify(locations));
+            localStorage.setItem(STORAGE_KEYS.seenJobs, JSON.stringify(seenJobs));
+        }
+
+        // Company autocomplete functions
+        function handleCompanyInput(event) {
+            const query = event.target.value.trim();
+            
+            clearTimeout(companySearchTimeout);
+            
+            if (query.length < 1) {
+                hideCompanyDropdown();
+                return;
+            }
+
+            companySearchTimeout = setTimeout(() => {
+                searchCompanies(query);
+            }, 300);
+        }
+
+        function searchCompanies(query) {
+            const dropdown = document.getElementById('companyDropdown');
+            const lowerQuery = query.toLowerCase();
+            
+            // Search in popular companies
+            currentCompanySuggestions = POPULAR_COMPANIES.filter(company => 
+                company.name.toLowerCase().includes(lowerQuery)
+            ).slice(0, 10);
+
+            if (currentCompanySuggestions.length === 0) {
+                dropdown.innerHTML = '<div class="autocomplete-no-results">No companies found. Press Enter to add "' + query + '"</div>';
+            } else {
+                dropdown.innerHTML = currentCompanySuggestions.map((company, index) => `
+                    <div class="autocomplete-item" data-index="${index}" onclick="selectCompany('${company.name.replace(/'/g, "\\'")}')">
+                        <span class="company-name">${highlightMatch(company.name, query)}</span>
+                        <span class="company-info">${company.industry} • ${company.type}</span>
+                    </div>
+                `).join('');
+            }
+            
+            dropdown.style.display = 'block';
+            selectedCompanyIndex = -1;
+        }
+
+        function highlightMatch(text, query) {
+            const regex = new RegExp(`(${query})`, 'gi');
+            return text.replace(regex, '<strong>$1</strong>');
+        }
+
+        function handleCompanyKeydown(event) {
+            const dropdown = document.getElementById('companyDropdown');
+            
+            if (dropdown.style.display === 'none') {
+                if (event.key === 'Enter') {
+                    addCompany();
+                }
+                return;
+            }
+
+            switch(event.key) {
+                case 'ArrowDown':
+                    event.preventDefault();
+                    selectedCompanyIndex = Math.min(selectedCompanyIndex + 1, currentCompanySuggestions.length - 1);
+                    updateCompanySelection();
+                    break;
+                case 'ArrowUp':
+                    event.preventDefault();
+                    selectedCompanyIndex = Math.max(selectedCompanyIndex - 1, -1);
+                    updateCompanySelection();
+                    break;
+                case 'Enter':
+                    event.preventDefault();
+                    if (selectedCompanyIndex >= 0) {
+                        selectCompany(currentCompanySuggestions[selectedCompanyIndex].name);
+                    } else {
+                        addCompany();
+                    }
+                    break;
+                case 'Escape':
+                    hideCompanyDropdown();
+                    break;
+            }
+        }
+
+        function updateCompanySelection() {
+            const items = document.querySelectorAll('.autocomplete-item');
+            items.forEach((item, index) => {
+                if (index === selectedCompanyIndex) {
+                    item.classList.add('selected');
+                    item.scrollIntoView({ block: 'nearest' });
+                } else {
+                    item.classList.remove('selected');
+                }
+            });
+        }
+
+        function selectCompany(companyName) {
+            const input = document.getElementById('companyInput');
+            input.value = companyName;
+            hideCompanyDropdown();
+            addCompany();
+        }
+
+        function hideCompanyDropdown() {
+            const dropdown = document.getElementById('companyDropdown');
+            dropdown.style.display = 'none';
+            selectedCompanyIndex = -1;
+            currentCompanySuggestions = [];
+        }
+
+        // Click outside to close dropdown
+        document.addEventListener('click', function(event) {
+            const companyInput = document.getElementById('companyInput');
+            const dropdown = document.getElementById('companyDropdown');
+            
+            if (!companyInput.contains(event.target) && !dropdown.contains(event.target)) {
+                hideCompanyDropdown();
+            }
+        });
+
+        function addCompany() {
+            const input = document.getElementById('companyInput');
+            const company = input.value.trim();
+            if (company && !companies.includes(company)) {
+                companies.push(company);
+                saveData();
+                renderCompanies();
+                input.value = '';
+                hideCompanyDropdown();
+                updateStats();
+            } else if (companies.includes(company)) {
+                alert('This company is already in your tracking list!');
+                input.value = '';
+                hideCompanyDropdown();
+            }
+        }
+
+        function removeCompany(company) {
+            companies = companies.filter(c => c !== company);
+            saveData();
+            renderCompanies();
+            updateStats();
+        }
+
+        function addRole() {
+            const input = document.getElementById('roleInput');
+            const role = input.value.trim();
+            if (role && !roles.includes(role)) {
+                roles.push(role);
+                saveData();
+                renderRoles();
+                input.value = '';
+            }
+        }
+
+        function removeRole(role) {
+            roles = roles.filter(r => r !== role);
+            saveData();
+            renderRoles();
+        }
+
+        function renderCompanies() {
+            const list = document.getElementById('companyList');
+            if (companies.length === 0) {
+                list.innerHTML = '<p style="color: #666;">No companies added yet. Add companies you want to track.</p>';
+                return;
+            }
+            list.innerHTML = companies.map(company => `
+                <div class="tag">
+                    <span>${company}</span>
+                    <button onclick="removeCompany('${company.replace(/'/g, "\\'")}')">×</button>
+                </div>
+            `).join('');
+        }
+
+        function renderRoles() {
+            const list = document.getElementById('roleList');
+            if (roles.length === 0) {
+                list.innerHTML = '<p style="color: #666;">No roles added yet. Add job roles you\'re interested in.</p>';
+                return;
+            }
+            list.innerHTML = roles.map(role => `
+                <div class="tag">
+                    <span>${role}</span>
+                    <button onclick="removeRole('${role.replace(/'/g, "\\'")}')">×</button>
+                </div>
+            `).join('');
+        }
+
+        function updateStats() {
+            document.getElementById('trackedCompanies').textContent = companies.length;
+            
+            const lastChecked = localStorage.getItem(STORAGE_KEYS.lastChecked);
+            if (lastChecked) {
+                const date = new Date(lastChecked);
+                document.getElementById('lastChecked').textContent = 
+                    `Last checked: ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`;
+            }
+        }
+
+        function generateJobId(job) {
+            return `${job.company}_${job.title}_${job.location}`.toLowerCase().replace(/\s/g, '_');
+        }
+
+        async function checkJobs() {
+            if (companies.length === 0 || roles.length === 0) {
+                alert('Please add at least one company and one job role to track.');
+                return;
+            }
+
+            const button = document.getElementById('checkButton');
+            const resultsDiv = document.getElementById('jobResults');
+            
+            button.disabled = true;
+            button.textContent = '🔄 Checking...';
+            resultsDiv.innerHTML = '<div class="loading">Searching for jobs</div>';
+
+            try {
+                // Simulate API call - In production, you'd call real job APIs here
+                const jobs = await fetchJobs();
+                
+                // Mark new jobs
+                const newJobIds = [];
+                jobs.forEach(job => {
+                    const jobId = generateJobId(job);
+                    if (!seenJobs.includes(jobId)) {
+                        job.isNew = true;
+                        newJobIds.push(jobId);
+                    }
+                });
+
+                // Add new jobs to seen list
+                seenJobs = [...seenJobs, ...newJobIds];
+                localStorage.setItem(STORAGE_KEYS.seenJobs, JSON.stringify(seenJobs));
+                localStorage.setItem(STORAGE_KEYS.lastChecked, new Date().toISOString());
+
+                // Store jobs globally
+                allJobs = jobs;
+                
+                // Populate city filter
+                populateCityFilter(jobs);
+                
+                // Render jobs
+                filterJobs();
+                
+                document.getElementById('totalJobs').textContent = jobs.length;
+                document.getElementById('newJobs').textContent = newJobIds.length;
+                updateStats();
+
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="empty-state">
+                    <p>Error fetching jobs. Please try again.</p>
+                </div>`;
+            } finally {
+                button.disabled = false;
+                button.textContent = '🔄 Check for New Jobs';
+            }
+        }
+
+        async function fetchJobs() {
+            // This is a simulation - in production you would call real job board APIs
+            // For example: LinkedIn API, Indeed API, Adzuna API, etc.
+            
+            await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay
+            
+            const mockJobs = [];
+            const visaStatuses = ['sponsored', 'not-sponsored', 'unknown'];
+            const visaTypes = ['H1B', 'H1B, Green Card', 'All visa types', null];
+            const allLocations = ['Remote', 'New York, NY', 'San Francisco, CA', 'Austin, TX', 'Seattle, WA', 
+                                  'Boston, MA', 'Chicago, IL', 'Los Angeles, CA', 'Denver, CO', 'Atlanta, GA'];
+            
+            companies.forEach(company => {
+                roles.forEach(role => {
+                    // Generate 0-3 mock jobs per company-role combination
+                    const numJobs = Math.floor(Math.random() * 4);
+                    for (let i = 0; i < numJobs; i++) {
+                        const postedDaysAgo = Math.floor(Math.random() * 30);
+                        const postedDate = new Date();
+                        postedDate.setDate(postedDate.getDate() - postedDaysAgo);
+                        
+                        const daysUntilDeadline = Math.floor(Math.random() * 45) + 5;
+                        const deadlineDate = new Date();
+                        deadlineDate.setDate(deadlineDate.getDate() + daysUntilDeadline);
+                        
+                        const visaStatus = visaStatuses[Math.floor(Math.random() * visaStatuses.length)];
+                        const visaType = visaStatus === 'sponsored' ? 
+                            visaTypes[Math.floor(Math.random() * (visaTypes.length - 1))] : null;
+                        
+                        // If user specified preferred locations, favor those
+                        let jobLocation;
+                        if (locations.length > 0 && Math.random() > 0.3) {
+                            jobLocation = locations[Math.floor(Math.random() * locations.length)];
+                        } else {
+                            jobLocation = allLocations[Math.floor(Math.random() * allLocations.length)];
+                        }
+                        
+                        mockJobs.push({
+                            title: role,
+                            company: company,
+                            location: jobLocation,
+                            url: `https://careers.example.com/${company.toLowerCase().replace(/\s/g, '-')}/${Math.random().toString(36).substring(7)}`,
+                            postedDate: postedDate,
+                            deadlineDate: deadlineDate,
+                            visaSponsorship: visaStatus,
+                            visaTypes: visaType
+                        });
+                    }
+                });
+            });
+
+            return mockJobs;
+        }
+
+        function formatDate(date) {
+            const options = { month: 'short', day: 'numeric', year: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        function getTimeAgo(date) {
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 0) return 'Today';
+            if (diffDays === 1) return 'Yesterday';
+            if (diffDays < 7) return `${diffDays} days ago`;
+            if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+            return `${Math.floor(diffDays / 30)} months ago`;
+        }
+
+        function getDaysUntil(date) {
+            const now = new Date();
+            const diffTime = date - now;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays;
+        }
+
+        function getDeadlineText(date) {
+            const daysUntil = getDaysUntil(date);
+            
+            if (daysUntil < 0) return '<span class="deadline-warning">Expired</span>';
+            if (daysUntil === 0) return '<span class="deadline-warning">Today</span>';
+            if (daysUntil === 1) return '<span class="deadline-warning">Tomorrow</span>';
+            if (daysUntil <= 7) return `<span class="deadline-soon">${daysUntil} days left</span>`;
+            return `${daysUntil} days left`;
+        }
+
+        function getVisaBadge(job) {
+            if (job.visaSponsorship === 'sponsored') {
+                return `<span class="visa-badge sponsored">✓ Visa Sponsored${job.visaTypes ? ': ' + job.visaTypes : ''}</span>`;
+            } else if (job.visaSponsorship === 'not-sponsored') {
+                return '<span class="visa-badge not-sponsored">✗ No Visa Sponsorship</span>';
+            } else {
+                return '<span class="visa-badge unknown">? Visa Info Not Specified</span>';
+            }
+        }
+
+        function populateCityFilter(jobs) {
+            const cities = [...new Set(jobs.map(job => job.location))].sort();
+            const cityFilter = document.getElementById('cityFilter');
+            const currentValue = cityFilter.value;
+            
+            cityFilter.innerHTML = '<option value="all">All Locations</option>' + 
+                cities.map(city => `<option value="${city}">${city}</option>`).join('');
+            
+            // Restore previous selection if it still exists
+            if (cities.includes(currentValue)) {
+                cityFilter.value = currentValue;
+            }
+        }
+
+        function filterJobs() {
+            const cityFilter = document.getElementById('cityFilter').value;
+            const visaFilter = document.getElementById('visaFilter').value;
+            const groupByCompany = document.getElementById('groupToggle').checked;
+            
+            let filteredJobs = allJobs.filter(job => {
+                const cityMatch = cityFilter === 'all' || job.location === cityFilter;
+                const visaMatch = visaFilter === 'all' || job.visaSponsorship === visaFilter;
+                return cityMatch && visaMatch;
+            });
+            
+            if (groupByCompany) {
+                renderJobsGrouped(filteredJobs);
+            } else {
+                renderJobs(filteredJobs);
+            }
+        }
+
+        function renderJobsGrouped(jobs) {
+            const resultsDiv = document.getElementById('jobResults');
+            
+            if (jobs.length === 0) {
+                resultsDiv.innerHTML = `
+                    <div class="empty-state">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <p>No jobs found matching your filters.</p>
+                        <p style="font-size: 0.9rem; margin-top: 10px;">Try adjusting your filters or check again later.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Group jobs by company
+            const jobsByCompany = {};
+            jobs.forEach(job => {
+                if (!jobsByCompany[job.company]) {
+                    jobsByCompany[job.company] = [];
+                }
+                jobsByCompany[job.company].push(job);
+            });
+
+            const sortedCompanies = Object.keys(jobsByCompany).sort();
+            
+            resultsDiv.innerHTML = sortedCompanies.map(company => {
+                const companyJobs = jobsByCompany[company];
+                const newCount = companyJobs.filter(j => j.isNew).length;
+                
+                return `
+                    <div class="company-group">
+                        <div class="company-group-header">
+                            <span>${company}</span>
+                            <span class="company-job-count">
+                                ${companyJobs.length} ${companyJobs.length === 1 ? 'job' : 'jobs'}
+                                ${newCount > 0 ? ` · ${newCount} new` : ''}
+                            </span>
+                        </div>
+                        <div class="company-jobs">
+                            <div class="job-list">
+                                ${companyJobs.map(job => renderJobCard(job)).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderJobCard(job) {
+            return `
+                <div class="job-item ${job.isNew ? 'new-job' : ''}">
+                    ${job.isNew ? '<span class="new-badge">NEW</span>' : ''}
+                    <div class="job-title">${job.title}</div>
+                    <div class="job-company">${job.company}</div>
+                    <div class="job-location">📍 ${job.location}</div>
+                    <div class="job-meta">
+                        <div class="job-meta-item">
+                            <span class="label">Posted:</span>
+                            <span>${getTimeAgo(job.postedDate)} (${formatDate(job.postedDate)})</span>
+                        </div>
+                        <div class="job-meta-item">
+                            <span class="label">Deadline:</span>
+                            <span>${getDeadlineText(job.deadlineDate)} (${formatDate(job.deadlineDate)})</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        ${getVisaBadge(job)}
+                    </div>
+                    <a href="${job.url}" target="_blank" class="job-link">View Job & Apply →</a>
+                </div>
+            `;
+        }
+
+        function renderJobs(jobs) {
+            const resultsDiv = document.getElementById('jobResults');
+            
+            if (jobs.length === 0) {
+                resultsDiv.innerHTML = `
+                    <div class="empty-state">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <p>No jobs found matching your criteria.</p>
+                        <p style="font-size: 0.9rem; margin-top: 10px;">Try checking again later or add more companies/roles.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            resultsDiv.innerHTML = `
+                <div class="job-list">
+                    ${jobs.map(job => renderJobCard(job)).join('')}
+                </div>
+            `;
+        }
+
+        // Initialize on load
+        renderCompanies();
+        renderRoles();
+        renderLocations();
+        updateStats();
+        
+        // Show initial state
+        document.getElementById('jobResults').innerHTML = `
+            <div class="empty-state">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+                <p>Add companies and roles above, then click "Check for New Jobs"</p>
+            </div>
+        `;
+    </script>
+</body>
+</html>
