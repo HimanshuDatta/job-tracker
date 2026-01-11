@@ -13,9 +13,10 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0f0f0f;
             min-height: 100vh;
             padding: 20px;
+            padding-bottom: 100px;
         }
 
         .container {
@@ -32,26 +33,32 @@
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
+            background: linear-gradient(135deg, #00f5a0 0%, #00d9f5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .header p {
             font-size: 1.1rem;
-            opacity: 0.9;
+            opacity: 0.7;
+            color: #a0a0a0;
         }
 
         .card {
-            background: white;
-            border-radius: 12px;
+            background: #1a1a1a;
+            border-radius: 16px;
             padding: 25px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            border: 1px solid #2a2a2a;
         }
 
         .card h2 {
-            color: #333;
+            color: #ffffff;
             margin-bottom: 20px;
             font-size: 1.5rem;
-            border-bottom: 2px solid #667eea;
+            border-bottom: 2px solid #00f5a0;
             padding-bottom: 10px;
         }
 
@@ -66,44 +73,51 @@
             flex: 1;
             min-width: 200px;
             padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 6px;
+            border: 2px solid #2a2a2a;
+            border-radius: 8px;
             font-size: 1rem;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
+            background: #0f0f0f;
+            color: #ffffff;
         }
 
         input[type="text"]:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #00f5a0;
+            background: #1a1a1a;
         }
 
         button {
             padding: 12px 24px;
-            background: #667eea;
-            color: white;
+            background: linear-gradient(135deg, #00f5a0 0%, #00d9f5 100%);
+            color: #0f0f0f;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
             font-weight: 600;
         }
 
         button:hover {
-            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 245, 160, 0.3);
         }
 
         button:disabled {
-            background: #ccc;
+            background: #2a2a2a;
             cursor: not-allowed;
+            transform: none;
         }
 
         .btn-secondary {
-            background: #6c757d;
+            background: #2a2a2a;
+            color: #ffffff;
         }
 
         .btn-secondary:hover {
-            background: #5a6268;
+            background: #3a3a3a;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
         }
 
         .btn-danger {
@@ -141,29 +155,34 @@
 
         .filter-group label {
             font-weight: 600;
-            color: #333;
+            color: #ffffff;
             font-size: 0.9rem;
         }
 
         select {
             padding: 10px;
-            border: 2px solid #e0e0e0;
-            border-radius: 6px;
+            border: 2px solid #2a2a2a;
+            border-radius: 8px;
             font-size: 1rem;
-            background: white;
+            background: #0f0f0f;
+            color: #ffffff;
             cursor: pointer;
             transition: border-color 0.3s;
         }
 
         select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #00f5a0;
         }
 
         .toggle-group {
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .toggle-group label {
+            color: #ffffff;
         }
 
         .toggle-switch {
@@ -203,7 +222,7 @@
         }
 
         input:checked + .toggle-slider {
-            background-color: #667eea;
+            background-color: #00f5a0;
         }
 
         input:checked + .toggle-slider:before {
@@ -215,10 +234,10 @@
         }
 
         .company-group-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #00f5a0 0%, #00d9f5 100%);
+            color: #0f0f0f;
             padding: 15px 20px;
-            border-radius: 8px 8px 0 0;
+            border-radius: 12px 12px 0 0;
             font-size: 1.2rem;
             font-weight: 600;
             display: flex;
@@ -227,18 +246,18 @@
         }
 
         .company-job-count {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(15, 15, 15, 0.2);
             padding: 4px 12px;
             border-radius: 12px;
             font-size: 0.9rem;
         }
 
         .company-jobs {
-            border: 2px solid #667eea;
+            border: 2px solid #2a2a2a;
             border-top: none;
-            border-radius: 0 0 8px 8px;
+            border-radius: 0 0 12px 12px;
             padding: 15px;
-            background: #f8f9ff;
+            background: #1a1a1a;
         }
 
         .tag-list {
@@ -277,29 +296,31 @@
         }
 
         .job-item {
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            border: 2px solid #2a2a2a;
+            border-radius: 12px;
             padding: 15px;
-            transition: border-color 0.3s, transform 0.2s;
+            transition: all 0.3s;
             position: relative;
+            background: #1a1a1a;
         }
 
         .job-item:hover {
-            border-color: #667eea;
+            border-color: #00f5a0;
             transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 245, 160, 0.1);
         }
 
         .job-item.new-job {
-            border-color: #28a745;
-            background: #f0fff4;
+            border-color: #00f5a0;
+            background: linear-gradient(135deg, rgba(0, 245, 160, 0.05) 0%, rgba(0, 217, 245, 0.05) 100%);
         }
 
         .job-item .new-badge {
             position: absolute;
             top: 10px;
             right: 10px;
-            background: #28a745;
-            color: white;
+            background: linear-gradient(135deg, #00f5a0 0%, #00d9f5 100%);
+            color: #0f0f0f;
             padding: 4px 12px;
             border-radius: 12px;
             font-size: 0.8rem;
@@ -309,20 +330,20 @@
         .job-title {
             font-size: 1.2rem;
             font-weight: 600;
-            color: #333;
+            color: #ffffff;
             margin-bottom: 8px;
         }
 
         .job-company {
             font-size: 1rem;
-            color: #667eea;
+            color: #00f5a0;
             font-weight: 500;
             margin-bottom: 8px;
         }
 
         .job-location {
             font-size: 0.9rem;
-            color: #666;
+            color: #a0a0a0;
             margin-bottom: 8px;
         }
 
@@ -332,7 +353,7 @@
             gap: 15px;
             margin-top: 12px;
             padding-top: 12px;
-            border-top: 1px solid #e0e0e0;
+            border-top: 1px solid #2a2a2a;
             font-size: 0.85rem;
         }
 
@@ -340,12 +361,12 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            color: #555;
+            color: #a0a0a0;
         }
 
         .job-meta-item .label {
             font-weight: 600;
-            color: #333;
+            color: #ffffff;
         }
 
         .visa-badge {
@@ -383,16 +404,338 @@
             font-weight: 600;
         }
 
+        .match-indicator {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .match-excellent {
+            background: linear-gradient(135deg, #00c853 0%, #00e676 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 200, 83, 0.3);
+        }
+
+        .match-good {
+            background: linear-gradient(135deg, #2196f3 0%, #64b5f6 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+        }
+
+        .match-fair {
+            background: linear-gradient(135deg, #ff9800 0%, #ffb74d 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+        }
+
+        .match-low {
+            background: linear-gradient(135deg, #9e9e9e 0%, #bdbdbd 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(158, 158, 158, 0.3);
+        }
+
+        .job-item.new-job .match-indicator {
+            left: auto;
+            right: 10px;
+        }
+
+        .profile-setup-banner {
+            background: linear-gradient(135deg, #00f5a0 0%, #00d9f5 100%);
+            color: #0f0f0f;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 4px 12px rgba(0, 245, 160, 0.2);
+        }
+
+        .profile-setup-banner button {
+            background: #0f0f0f;
+            color: #00f5a0;
+        }
+
+        .profile-setup-banner button:hover {
+            background: #1a1a1a;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            border-radius: 12px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid #2a2a2a;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #00f5a0 0%, #00d9f5 100%);
+            color: #0f0f0f;
+            padding: 25px;
+            border-radius: 12px 12px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(15, 15, 15, 0.2);
+            color: #0f0f0f;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .modal-close:hover {
+            background: rgba(15, 15, 15, 0.3);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px;
+            border: 2px solid #2a2a2a;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s;
+            background: #0f0f0f;
+            color: #ffffff;
+        }
+
+        .form-group textarea:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #00f5a0;
+        }
+
+        .form-help {
+            font-size: 0.85rem;
+            color: #a0a0a0;
+            margin-top: 5px;
+        }
+
+        .modal-footer {
+            padding: 20px 30px;
+            border-top: 1px solid #2a2a2a;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .resume-preview {
+            background: white;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+        }
+
+        .resume-preview h1 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .resume-preview h2 {
+            font-size: 1.3rem;
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .resume-preview h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .resume-preview .contact-info {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .resume-preview .section {
+            margin-bottom: 20px;
+        }
+
+        .resume-preview ul {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+
+        .resume-preview li {
+            margin-bottom: 5px;
+        }
+
+        .btn-download {
+            background: #28a745;
+        }
+
+        .btn-download:hover {
+            background: #218838;
+        }
+
+        .fixed-action-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(15, 15, 15, 0) 0%, rgba(15, 15, 15, 0.95) 20%, #0f0f0f 100%);
+            box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .fixed-action-bar button {
+            font-size: 1.1rem;
+            padding: 15px 40px;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #2a2a2a;
+        }
+
+        .spinner {
+            border: 4px solid #2a2a2a;
+            border-top: 4px solid #00f5a0;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .auto-refresh-notice {
+            background: rgba(0, 245, 160, 0.1);
+            color: #00f5a0;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 0.95rem;
+            border: 1px solid rgba(0, 245, 160, 0.3);
+        }
+
         .job-link {
             display: inline-block;
             margin-top: 10px;
-            color: #667eea;
+            color: #00f5a0;
             text-decoration: none;
             font-weight: 500;
         }
 
         .job-link:hover {
             text-decoration: underline;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #a0a0a0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #a0a0a0;
         }
 
         .stats {
@@ -403,11 +746,12 @@
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #00f5a0 0%, #00d9f5 100%);
+            color: #0f0f0f;
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 12px;
             text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 245, 160, 0.2);
         }
 
         .stat-number {
@@ -453,7 +797,7 @@
 
         .last-checked {
             text-align: center;
-            color: #666;
+            color: #a0a0a0;
             font-size: 0.9rem;
             margin-top: 10px;
         }
@@ -469,20 +813,20 @@
             top: 100%;
             left: 0;
             right: 0;
-            background: white;
-            border: 2px solid #667eea;
+            background: #1a1a1a;
+            border: 2px solid #00f5a0;
             border-top: none;
-            border-radius: 0 0 6px 6px;
+            border-radius: 0 0 8px 8px;
             max-height: 300px;
             overflow-y: auto;
             z-index: 1000;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 245, 160, 0.2);
         }
 
         .autocomplete-item {
             padding: 12px;
             cursor: pointer;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid #2a2a2a;
             transition: background 0.2s;
         }
 
@@ -492,32 +836,32 @@
 
         .autocomplete-item:hover,
         .autocomplete-item.selected {
-            background: #f0f0ff;
+            background: #2a2a2a;
         }
 
         .autocomplete-item .company-name {
             font-weight: 600;
-            color: #333;
+            color: #ffffff;
             display: block;
         }
 
         .autocomplete-item .company-info {
             font-size: 0.85rem;
-            color: #666;
+            color: #a0a0a0;
             margin-top: 2px;
         }
 
         .autocomplete-loading {
             padding: 12px;
             text-align: center;
-            color: #666;
+            color: #a0a0a0;
             font-size: 0.9rem;
         }
 
         .autocomplete-no-results {
             padding: 12px;
             text-align: center;
-            color: #999;
+            color: #a0a0a0;
             font-size: 0.9rem;
         }
 
@@ -544,24 +888,16 @@
             <p>Monitor job openings from your target companies</p>
         </div>
 
-        <div class="card">
-            <h2>📊 Today's Summary</h2>
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-number" id="totalJobs">0</div>
-                    <div class="stat-label">Total Jobs</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="newJobs">0</div>
-                    <div class="stat-label">New Today</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="trackedCompanies">0</div>
-                    <div class="stat-label">Companies</div>
-                </div>
+        <div id="autoRefreshNotice" class="auto-refresh-notice" style="display: none;">
+            ✓ Jobs automatically refreshed on page load
+        </div>
+
+        <div id="profileBanner" class="profile-setup-banner" style="display: none;">
+            <div>
+                <h3 style="margin: 0 0 5px 0;">📝 Complete your profile to see job match scores!</h3>
+                <p style="margin: 0; opacity: 0.9;">Add your skills and experience to get personalized job recommendations</p>
             </div>
-            <button onclick="checkJobs()" id="checkButton">🔄 Check for New Jobs</button>
-            <div class="last-checked" id="lastChecked"></div>
+            <button onclick="openProfileModal()">Setup Profile</button>
         </div>
 
         <div class="card">
@@ -592,6 +928,27 @@
                 <button onclick="addLocation()">Add Location</button>
             </div>
             <div class="tag-list" id="locationList"></div>
+            <p style="color: #a0a0a0; font-size: 0.85rem; margin-top: 10px;">Optional: Add locations to prioritize in results</p>
+        </div>
+
+        <div class="card">
+            <h2>📊 Today's Summary</h2>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalJobs">0</div>
+                    <div class="stat-label">Total Jobs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="newJobs">0</div>
+                    <div class="stat-label">New Today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="trackedCompanies">0</div>
+                    <div class="stat-label">Companies</div>
+                </div>
+            </div>
+            <button onclick="openProfileModal()" class="btn-secondary">⚙️ Manage Profile</button>
+            <div class="last-checked" id="lastChecked"></div>
         </div>
 
         <div class="card">
@@ -613,7 +970,7 @@
                     </select>
                 </div>
                 <div class="toggle-group">
-                    <label for="groupToggle" style="font-weight: 600; color: #333;">Group by Company:</label>
+                    <label for="groupToggle">Group by Company:</label>
                     <label class="toggle-switch">
                         <input type="checkbox" id="groupToggle" onchange="filterJobs()">
                         <span class="toggle-slider"></span>
@@ -621,6 +978,87 @@
                 </div>
             </div>
             <div id="jobResults"></div>
+        </div>
+
+        <!-- Fixed Action Bar -->
+        <div class="fixed-action-bar">
+            <button onclick="checkJobs()" id="checkButton">🔄 Refresh Jobs</button>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay">
+                            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p style="margin: 0; font-size: 1.1rem; color: #ffffff;">Searching for jobs...</p>
+            </div>
+        </div>
+
+        <!-- Profile Modal -->
+        <div id="profileModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>👤 Your Profile</h2>
+                    <button class="modal-close" onclick="closeProfileModal()">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="profileName">Full Name *</label>
+                        <input type="text" id="profileName" placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileEmail">Email *</label>
+                        <input type="email" id="profileEmail" placeholder="john.doe@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="profilePhone">Phone</label>
+                        <input type="text" id="profilePhone" placeholder="+1 (555) 123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileSkills">Skills *</label>
+                        <textarea id="profileSkills" placeholder="e.g., Python, JavaScript, React, Machine Learning, Data Analysis, AWS, Docker"></textarea>
+                        <div class="form-help">Separate skills with commas. These help calculate your job match score.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileExperience">Years of Experience *</label>
+                        <input type="number" id="profileExperience" placeholder="5" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileSummary">Professional Summary *</label>
+                        <textarea id="profileSummary" placeholder="e.g., Experienced software engineer with 5+ years building scalable web applications..."></textarea>
+                        <div class="form-help">Brief overview of your professional background (2-3 sentences)</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileWorkHistory">Work History</label>
+                        <textarea id="profileWorkHistory" placeholder="Company Name | Job Title | Duration&#10;• Achievement 1&#10;• Achievement 2&#10;&#10;Previous Company | Previous Title | Duration&#10;• Achievement 1"></textarea>
+                        <div class="form-help">List your work experience with bullet points for achievements</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileEducation">Education</label>
+                        <textarea id="profileEducation" placeholder="University Name | Degree | Graduation Year&#10;e.g., Stanford University | BS Computer Science | 2020"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" onclick="closeProfileModal()">Cancel</button>
+                    <button onclick="saveProfile()">Save Profile</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resume Modal -->
+        <div id="resumeModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>📄 Tailored Resume</h2>
+                    <button class="modal-close" onclick="closeResumeModal()">×</button>
+                </div>
+                <div class="modal-body">
+                    <div id="resumeContent" class="resume-preview"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" onclick="closeResumeModal()">Close</button>
+                    <button class="btn-download" onclick="downloadResume()">📥 Download as Text</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -631,7 +1069,8 @@
             roles: 'jobTracker_roles',
             locations: 'jobTracker_locations',
             seenJobs: 'jobTracker_seenJobs',
-            lastChecked: 'jobTracker_lastChecked'
+            lastChecked: 'jobTracker_lastChecked',
+            userProfile: 'jobTracker_userProfile'
         };
 
         // Popular companies database (you can expand this list)
@@ -743,6 +1182,7 @@
         let roles = JSON.parse(localStorage.getItem(STORAGE_KEYS.roles) || '[]');
         let locations = JSON.parse(localStorage.getItem(STORAGE_KEYS.locations) || '[]');
         let seenJobs = JSON.parse(localStorage.getItem(STORAGE_KEYS.seenJobs) || '[]');
+        let userProfile = JSON.parse(localStorage.getItem(STORAGE_KEYS.userProfile) || 'null');
         let allJobs = [];
 
         function saveData() {
@@ -750,6 +1190,7 @@
             localStorage.setItem(STORAGE_KEYS.roles, JSON.stringify(roles));
             localStorage.setItem(STORAGE_KEYS.locations, JSON.stringify(locations));
             localStorage.setItem(STORAGE_KEYS.seenJobs, JSON.stringify(seenJobs));
+            localStorage.setItem(STORAGE_KEYS.userProfile, JSON.stringify(userProfile));
         }
 
         // Company autocomplete functions
@@ -912,7 +1353,7 @@
         function renderCompanies() {
             const list = document.getElementById('companyList');
             if (companies.length === 0) {
-                list.innerHTML = '<p style="color: #666;">No companies added yet. Add companies you want to track.</p>';
+                list.innerHTML = '<p style="color: #a0a0a0;">No companies added yet. Add companies you want to track.</p>';
                 return;
             }
             list.innerHTML = companies.map(company => `
@@ -926,7 +1367,7 @@
         function renderRoles() {
             const list = document.getElementById('roleList');
             if (roles.length === 0) {
-                list.innerHTML = '<p style="color: #666;">No roles added yet. Add job roles you\'re interested in.</p>';
+                list.innerHTML = '<p style="color: #a0a0a0;">No roles added yet. Add job roles you\'re interested in.</p>';
                 return;
             }
             list.innerHTML = roles.map(role => `
@@ -946,6 +1387,14 @@
                 document.getElementById('lastChecked').textContent = 
                     `Last checked: ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`;
             }
+
+            // Show profile banner if no profile exists
+            const banner = document.getElementById('profileBanner');
+            if (!userProfile) {
+                banner.style.display = 'flex';
+            } else {
+                banner.style.display = 'none';
+            }
         }
 
         function generateJobId(job) {
@@ -960,10 +1409,12 @@
 
             const button = document.getElementById('checkButton');
             const resultsDiv = document.getElementById('jobResults');
+            const loadingOverlay = document.getElementById('loadingOverlay');
             
             button.disabled = true;
             button.textContent = '🔄 Checking...';
-            resultsDiv.innerHTML = '<div class="loading">Searching for jobs</div>';
+            loadingOverlay.classList.add('active');
+            resultsDiv.innerHTML = '';
 
             try {
                 // Simulate API call - In production, you'd call real job APIs here
@@ -987,6 +1438,15 @@
                 // Store jobs globally
                 allJobs = jobs;
                 
+                // Calculate match scores if profile exists
+                if (userProfile) {
+                    jobs.forEach(job => {
+                        job.matchScore = calculateMatchScore(job);
+                    });
+                    // Sort by match score descending
+                    jobs.sort((a, b) => (b.matchScore || 0) - (a.matchScore || 0));
+                }
+                
                 // Populate city filter
                 populateCityFilter(jobs);
                 
@@ -1002,8 +1462,9 @@
                     <p>Error fetching jobs. Please try again.</p>
                 </div>`;
             } finally {
+                loadingOverlay.classList.remove('active');
                 button.disabled = false;
-                button.textContent = '🔄 Check for New Jobs';
+                button.textContent = '🔄 Refresh Jobs';
             }
         }
 
@@ -1048,17 +1509,94 @@
                             title: role,
                             company: company,
                             location: jobLocation,
-                            url: `https://careers.example.com/${company.toLowerCase().replace(/\s/g, '-')}/${Math.random().toString(36).substring(7)}`,
+                            url: null,
                             postedDate: postedDate,
                             deadlineDate: deadlineDate,
                             visaSponsorship: visaStatus,
-                            visaTypes: visaType
+                            visaTypes: visaType,
+                            requiredSkills: generateRequiredSkills(role),
+                            experienceRequired: Math.floor(Math.random() * 8) + 1,
+                            description: generateJobDescription(role, company)
                         });
                     }
                 });
             });
 
             return mockJobs;
+        }
+
+        function generateRequiredSkills(role) {
+            const skillSets = {
+                'Software Engineer': ['Python', 'JavaScript', 'React', 'Node.js', 'SQL', 'Git', 'AWS'],
+                'Product Manager': ['Product Strategy', 'Roadmapping', 'Agile', 'SQL', 'Analytics', 'Stakeholder Management'],
+                'Data Scientist': ['Python', 'Machine Learning', 'Statistics', 'SQL', 'TensorFlow', 'Data Visualization'],
+                'Data Analyst': ['SQL', 'Python', 'Excel', 'Tableau', 'Data Visualization', 'Statistics'],
+                'Frontend Developer': ['JavaScript', 'React', 'HTML', 'CSS', 'TypeScript', 'Vue.js'],
+                'Backend Developer': ['Python', 'Java', 'Node.js', 'SQL', 'REST API', 'Docker'],
+                'DevOps Engineer': ['AWS', 'Docker', 'Kubernetes', 'CI/CD', 'Linux', 'Terraform'],
+                'UX Designer': ['Figma', 'User Research', 'Wireframing', 'Prototyping', 'Adobe XD'],
+                'Marketing Manager': ['Digital Marketing', 'SEO', 'Content Strategy', 'Analytics', 'Campaign Management']
+            };
+            
+            const baseSkills = skillSets[role] || ['Communication', 'Problem Solving', 'Teamwork'];
+            const numSkills = Math.floor(Math.random() * 3) + 5;
+            return baseSkills.slice(0, numSkills);
+        }
+
+        function generateJobDescription(role, company) {
+            return `${company} is seeking a talented ${role} to join our growing team. You will work on exciting projects and collaborate with cross-functional teams to deliver innovative solutions.`;
+        }
+
+        function calculateMatchScore(job) {
+            if (!userProfile) return 0;
+
+            let score = 0;
+            let factors = 0;
+
+            // Skills match (50% weight)
+            if (userProfile.skills && job.requiredSkills) {
+                const userSkills = userProfile.skills.toLowerCase().split(',').map(s => s.trim());
+                const jobSkills = job.requiredSkills.map(s => s.toLowerCase());
+                const matchedSkills = userSkills.filter(skill => 
+                    jobSkills.some(jobSkill => jobSkill.includes(skill) || skill.includes(jobSkill))
+                );
+                const skillMatch = (matchedSkills.length / jobSkills.length) * 100;
+                score += skillMatch * 0.5;
+                factors++;
+            }
+
+            // Experience match (30% weight)
+            if (userProfile.experience && job.experienceRequired) {
+                const expDiff = Math.abs(userProfile.experience - job.experienceRequired);
+                let expScore = 100;
+                if (expDiff > 0) expScore = Math.max(0, 100 - (expDiff * 15));
+                score += expScore * 0.3;
+                factors++;
+            }
+
+            // Location preference (20% weight)
+            if (locations.length > 0) {
+                const locationMatch = locations.includes(job.location) ? 100 : 50;
+                score += locationMatch * 0.2;
+                factors++;
+            } else {
+                score += 100 * 0.2;
+                factors++;
+            }
+
+            return factors > 0 ? Math.round(score) : 0;
+        }
+
+        function getMatchBadge(matchScore) {
+            if (matchScore >= 80) {
+                return '<div class="match-indicator match-excellent">🔥 ' + matchScore + '% Match</div>';
+            } else if (matchScore >= 60) {
+                return '<div class="match-indicator match-good">✓ ' + matchScore + '% Match</div>';
+            } else if (matchScore >= 40) {
+                return '<div class="match-indicator match-fair">~ ' + matchScore + '% Match</div>';
+            } else {
+                return '<div class="match-indicator match-low">' + matchScore + '% Match</div>';
+            }
         }
 
         function formatDate(date) {
@@ -1188,9 +1726,11 @@
         }
 
         function renderJobCard(job) {
+            const showMatch = userProfile && job.matchScore !== undefined;
             return `
                 <div class="job-item ${job.isNew ? 'new-job' : ''}">
                     ${job.isNew ? '<span class="new-badge">NEW</span>' : ''}
+                    ${showMatch ? getMatchBadge(job.matchScore) : ''}
                     <div class="job-title">${job.title}</div>
                     <div class="job-company">${job.company}</div>
                     <div class="job-location">📍 ${job.location}</div>
@@ -1203,11 +1743,31 @@
                             <span class="label">Deadline:</span>
                             <span>${getDeadlineText(job.deadlineDate)} (${formatDate(job.deadlineDate)})</span>
                         </div>
+                        ${job.experienceRequired ? `
+                        <div class="job-meta-item">
+                            <span class="label">Experience:</span>
+                            <span>${job.experienceRequired}+ years</span>
+                        </div>
+                        ` : ''}
                     </div>
+                    ${job.requiredSkills ? `
+                    <div style="margin-top: 10px;">
+                        <span style="font-weight: 600; font-size: 0.9rem;">Required Skills:</span>
+                        <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px;">
+                            ${job.requiredSkills.slice(0, 5).map(skill => 
+                                `<span style="background: #f0f0ff; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">${skill}</span>`
+                            ).join('')}
+                            ${job.requiredSkills.length > 5 ? '<span style="padding: 4px 10px; font-size: 0.8rem; color: #666;">+' + (job.requiredSkills.length - 5) + ' more</span>' : ''}
+                        </div>
+                    </div>
+                    ` : ''}
                     <div style="margin-top: 10px;">
                         ${getVisaBadge(job)}
                     </div>
-                    <a href="${job.url}" target="_blank" class="job-link">View Job & Apply →</a>
+                    <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                        ${job.url ? `<a href="${job.url}" target="_blank" class="job-link">View Job & Apply →</a>` : '<span style="color: #999; font-size: 0.9rem;">⚠️ Demo data</span>'}
+                        ${userProfile ? `<button onclick="generateResume(${allJobs.indexOf(job)})" style="padding: 8px 16px; font-size: 0.9rem;">📄 Generate Resume</button>` : ''}
+                    </div>
                 </div>
             `;
         }
@@ -1247,9 +1807,27 @@
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                 </svg>
-                <p>Add companies and roles above, then click "Check for New Jobs"</p>
+                <p>Add companies and roles above, then jobs will load automatically</p>
             </div>
         `;
+
+        // Auto-refresh jobs on page load if companies and roles exist
+        window.addEventListener('load', function() {
+            if (companies.length > 0 && roles.length > 0) {
+                // Small delay to let the page render first
+                setTimeout(function() {
+                    document.getElementById('autoRefreshNotice').style.display = 'block';
+                    checkJobs();
+                    // Hide notice after 3 seconds
+                    setTimeout(function() {
+                        const notice = document.getElementById('autoRefreshNotice');
+                        notice.style.opacity = '0';
+                        notice.style.transition = 'opacity 0.5s';
+                        setTimeout(() => notice.style.display = 'none', 500);
+                    }, 3000);
+                }, 500);
+            }
+        });
     </script>
 </body>
 </html>
